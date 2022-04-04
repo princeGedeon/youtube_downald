@@ -10,6 +10,9 @@ while True:
     if url.lower().startswith(BASE_YOUTUBE_URL):
         break
     print("Vous devez entrez une Url de vidéo Youtube!!!")
+
+
+
 def on_downald_progress(stream,chunk,byte_remaining):
     bytes_downalded=stream.filezsize-byte_remaining
     percent=bytes_downalded*100 /stream.filezsize
@@ -22,7 +25,13 @@ print("NB VUES: ",youtube_video.views)
 print("AUTHOR :",youtube_video.author)
 
 #Pour une video choisir un flux (selon la resolution, audio ou vidéo)
-print("STREAMS")
+print("-- CHOIX DES RESOLUTIONS "
+      "")
+streams=youtube_video.streams.filter(progressive=True,file_extension='mp4')
+for i in range(len(streams)):
+    print(f"{i+1}-{streams[i].resolution}")
+print("Choissisez votre Resolution")
+
 
 
 stream = youtube_video.streams.get_lowest_resolution()
